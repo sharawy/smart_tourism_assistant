@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Optional
 
 import requests
 from pydantic import BaseModel, Field, PrivateAttr
+from typing import ClassVar
 
 # LangChain core
 from langchain.agents import AgentType, initialize_agent
@@ -219,7 +220,6 @@ class BudgetArgs(BaseModel):
     style: str = Field(..., description="budget | standard | luxury")
 
 
-from typing import ClassVar
 
 
 class TripBudgetPlanner(BaseTool):
@@ -264,7 +264,7 @@ SYSTEM_RULES = (
 )
 
 
-def build_agent(knowledge_path: str = "C:\\Users\\s606276\\PycharmProjects\\smart_tourism\\uae_knowledge.json"):
+def build_agent(knowledge_path: str = "uae_knowledge.json"):
     llm = _make_llm()
 
     tools = [
@@ -355,7 +355,6 @@ def interactive_demo():
             print("Goodbye!")
             break
 
-        # Simple heuristic: itinerary prompts route to LLM directly
         itinerary_triggers = [
             "plan my", "itinerary", "what can i do", "things to do", "day trip", "trip plan",
         ]
